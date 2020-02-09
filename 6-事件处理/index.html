@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    button {
+      background: skyblue;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    // Clock用class来定义，当组件第一次渲染到DOM中，设置一个定时器，称为挂载
+    // 当DOM中Clock组件要被删除的时候，应该清除计时器，称为卸载
+    class Clock extends React.Component {
+      constructor(props) {
+        super(props)
+        this.state = {
+          date: new Date().toLocaleTimeString()
+        }
+      }
+
+      tick() {
+        this.setState({
+          date: new Date().toLocaleTimeString()
+        })
+      }
+
+      componentDidMount() {
+        this.timer = setInterval(() => this.tick(), 1000)
+      }
+
+      componentWillUnmount() {
+        clearInterval(this.timer)
+      }
+
+      render() {
+        return (
+          <div>
+            now time is : {this.state.date}
+          </div>
+        )
+      }
+    }
+
+   // 函数定义方式
+   function Button () {
+     function handleClick(e) {
+       console.log('the function button was clicked: ', e.target)
+     }
+     // React事件采用小驼峰(camelCase)
+     return (
+       <button onClick={handleClick}>function button</button>
+     )
+   }
+
+   // 类定义方式
+   class Button2 extends React.Component {
+     constructor(props) {
+       super(props)
+     }
+
+     handleClick(e) {
+      console.log('the class button was clicked: ', e.target)
+     }
+
+     render() {
+       return (
+         <button onClick={this.handleClick}>class button</button>
+       )
+     }
+   }
+
+    ReactDOM.render(
+      <div style={{height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center'}}>
+        <Clock/>
+        <Button/> 
+        <Button2/>
+      </div>,
+      document.querySelector('#app')
+    )
+  </script>
+</body>
+</html>

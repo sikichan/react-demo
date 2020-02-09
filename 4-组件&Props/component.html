@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .UserInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+  }
+  .UserInfo img {
+    border-radius: 50%;
+    border: 1px solid red;
+    width: 40px;
+    height: 40px;
+  }
+  .UserInfo span {
+    font-size: 18px;
+    color: #c0c0c0;
+  }
+  .Content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex: 6;
+  }
+  .Content span:first-child{
+    color: pink;
+  }
+  .Content span:last-child{
+    color: grey;
+  }
+  .Comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 5px; 
+  }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    const avatar = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K"
+    function UserInfo(props) {
+      return (
+        <div className="UserInfo">
+          <img src={props.user.avatar}/>
+          <span>{props.user.username}</span>
+        </div>
+      )
+    }
+    function Content(props) {
+      return (
+        <div className="Content">
+          <span> {props.content}</span>
+          <span>{props.date}</span>
+        </div>
+      )
+    }
+    function Comment(props) {
+      return (
+        <div className="Comment">
+            <UserInfo user={props.user} />
+            <Content content={props.content} date={props.date} />
+        </div>
+      )
+    }
+
+    const content = 'hello world hello react hello siki'
+
+    ReactDOM.render(
+      <Comment user={{username: 'Siki', avatar}} content="hello world" date={new Date().toLocaleTimeString()}/>,
+      // <h1>{avatar}</h1>,
+      document.querySelector('#app')
+    )
+  </script>
+</body>
+</html>

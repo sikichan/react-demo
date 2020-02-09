@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+  const app = document.querySelector('#app')
+  // React元素是不可变对象，一旦被创建，无法更改它的子元素或属性
+  // 目前，更新UI的唯一方式是创建一个全新的元素，并传入ReactDOM.render()
+
+  // 写一个本地时钟
+    function clock() {
+      const ele = (
+        <div>
+          <h1>Hello React</h1>
+          <h1>Now time is :  {new Date().toLocaleTimeString()}</h1>
+        </div>
+      )
+      ReactDOM.render(
+        ele,
+        app
+      )
+    }
+    setInterval(clock, 1000)
+
+    // ReactDOM 会将元素和它的子元素与它们之前的状态进行比较，并只会进行必要的更新
+  </script>
+</body>
+</html>

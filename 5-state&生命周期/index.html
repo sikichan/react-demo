@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    // Clock用class来定义，当组件第一次渲染到DOM中，设置一个定时器，称为挂载
+    // 当DOM中Clock组件要被删除的时候，应该清除计时器，称为卸载
+    class Clock extends React.Component {
+      constructor(props) {
+        super(props)
+        this.state = {
+          date: new Date().toLocaleTimeString()
+        }
+      }
+
+      tick() {
+        console.log('running setState...', this.state)
+
+        this.setState({
+          date: new Date().toLocaleTimeString()
+        })
+      }
+
+      componentDidMount() {
+        this.timer = setInterval(() => this.tick(), 1000)
+        console.log(this.timer)
+      }
+
+      componentWillUnmount() {
+        clearInterval(this.timer)
+      }
+
+      render() {
+        console.log('running render function...')
+        return (
+          <div>
+            now time is : {this.state.date}
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Clock/>,
+      document.querySelector('#app')
+    )
+  </script>
+</body>
+</html>

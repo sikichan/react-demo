@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .big {
+      font-size: 30px;
+    }
+    .bold {
+      font-weight: 800;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+  const app = document.querySelector('#app')
+  // 定义组件的方法 以下两种定义方式是等效的
+  // 用JavaScript函数来定义
+  function Welcome(props) {
+    return <p className="bold big">Say Welcome to : {props.name}</p>
+  }
+  // 用 es6 的class来定义
+  class Hello extends React.Component {
+    render() {
+      return <h1 style={{color:'red',fontSize:'20px'}}>Say Hello to : {this.props.user.name}</h1>
+    }
+  }
+
+  const user = {name: 'SikiChan'}
+  function App() {
+    return (
+      <div>
+        <h2 style={{color:'pink'}}>xyz</h2>
+        <Welcome name="Siki"/>
+        <Welcome name="Xavier"/>
+        <Hello user={user} />
+      </div>
+    )
+  }
+  // React元素可以是DOM标签，也可以是自定义组件
+  // 自定义组件会将 JSX 所接收的所有属性，转换为单个对象传递给组件，这个对象称为 props
+  ReactDOM.render(
+    <App/>,
+    app
+  )
+
+  </script>
+</body>
+</html>
