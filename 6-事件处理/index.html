@@ -66,15 +66,39 @@
    class Button2 extends React.Component {
      constructor(props) {
        super(props)
+       this.state = {
+         hello: 'helloworld'
+       }
+       // 在构造函数中通过bind方法绑定this
+       this.handleClick = this.handleClick.bind(this)
      }
 
      handleClick(e) {
       console.log('the class button was clicked: ', e.target)
+      console.log('handleClick => this: ', this)
+      console.log('handleClick => props: ', props)
      }
 
+     // 利用箭头函数绑定 this ，再传入onClick
+     handleClick2 = (id, e) => {
+      console.log('handleClick2 => id: ', id)
+      console.log('handleClick2 => e:', e)
+     }
+
+     handleClick3(id, name, e) {
+      console.log('handleClick3 => id:', id, name)
+      console.log('handleClick3 => e:', e)
+
+     }
+
+     // 向事件处理程序传参方法1: 通过 bind 方法来传,e 是隐式传递的
+     // 方法2: 通过箭头函数来传，e 需要显式传递，e 作为最后一个参数
      render() {
-       return (
-         <button onClick={this.handleClick}>class button</button>
+      //  return (
+      //    <button onClick={this.handleClick3.bind(this, this.state.hello)}>{this.props.name}</button>
+      //  )
+      return (
+         <button onClick={(e) => this.handleClick3('helloreact','nameprop', e)}>{this.props.name}</button>
        )
      }
    }
@@ -83,7 +107,7 @@
       <div style={{height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center'}}>
         <Clock/>
         <Button/> 
-        <Button2/>
+        <Button2 name="handleClick3"/>
       </div>,
       document.querySelector('#app')
     )

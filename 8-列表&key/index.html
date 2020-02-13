@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+  const app = document.querySelector('#app')
+  function FruitList (props) {
+    // key 在数组的上下文中被指定
+    // key 在其兄弟节点之间应该是独一无二
+    // key 不用全局唯一，两个不同的数组可以用相同的 key 值
+    let fruitList = props.names.map((l) => {
+      return <li key={l.id}>{l.name}</li>
+    })
+    return (
+      <ul>
+        {fruitList}
+      </ul>
+    )
+  }
+  let fruitArray = [
+    {id: 1, name: 'apple'},
+    {id: 2, name: 'banana'},
+    {id: 3, name: 'pear'},
+  ]
+
+  function List (props) {
+    console.log('List props===> :', props)
+    // props 里取不到 key 属性，key 是传给React的，不是传给组件的
+    const list = props.names.map(i => <FruitList key={i.id} names={[i]}/>)
+    return list
+  }
+  ReactDOM.render(
+    <List names={fruitArray} id="2" key="2"/>,
+    app
+  )
+  </script>
+</body>
+</html>

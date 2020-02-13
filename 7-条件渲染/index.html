@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+  const app = document.querySelector('#app')
+  // React 中的条件渲染和 JavaScript 中的一样，
+  // 使用 JavaScript 运算符 if 
+  // 或者条件运算符去创建元素来表现当前的状态，
+  // 然后让 React 根据它们来更新 UI
+
+  class LoginButton extends React.Component {
+    constructor(props) {
+      super(props)
+    }
+    render() {
+      return (
+        <button onClick={this.props.onClick}>{this.props.isLoggedIn ? '登出': '登录'}</button>
+      )
+    }
+  }
+
+  function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn
+    return (
+      <div>
+        <h1>{isLoggedIn ? 'Welcome to React World': 'Please login'}</h1>
+      </div>
+    )
+  }
+
+  class LoginControl extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {isLoggedIn: props.isLoggedIn}
+    }
+    
+    handleLoginClick = ()=> {
+      this.setState((prevState) => {
+        console.log('prevState: ', prevState)
+
+        return {
+          isLoggedIn: !prevState.isLoggedIn
+        }
+      })
+    }
+
+    render() {
+      return (
+        <div>
+          <Greeting isLoggedIn={this.state.isLoggedIn}/>
+          <LoginButton onClick={this.handleLoginClick} isLoggedIn={this.state.isLoggedIn}/>
+        </div>
+        
+      )
+    }
+  }
+
+  ReactDOM.render(
+    <div>
+    <LoginControl isLoggedIn={false}/>
+    </div>,
+    app
+  )
+  </script>
+</body>
+</html>
