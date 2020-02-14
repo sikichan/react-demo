@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      border: none;
+      outline: none;
+    }
+    ul,li {
+      list-style: none;
+    }
+    a:link,a:active,a:visited {
+      text-decoration: none;
+      color: #fff;
+    }
+    .NavBar {
+      background-color: #000;
+      line-height: 60px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+    }
+    .Item {
+      color: #fff;
+      display: inline-block;
+      font-size: 18px;
+      margin-left: 50px;
+    }
+    .Dialog {
+      padding: 0 20px 10px;
+      box-shadow: 1px 1px 6px grey;
+      width: 600px;
+      min-height: 360px;
+      position: absolute;
+      top: 50%;
+      left:50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      /* align-content: space-around; */
+      visibility: visible;
+      transition: all 0.3s;
+    }
+    .Dialog-Hide {
+      visibility: hidden;
+    }
+    .Dialog-Header {
+      flex: 1;
+      color: #444444;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 60px;
+      text-align: center;
+    }
+    .Dialog-Footer {
+      align-self: flex-end;
+    }
+    .Dialog-Content {
+      flex: 4;
+      margin-bottom: 20px;
+    }
+    .PageContainer {
+      /* display: flex; */
+    }
+    .Button {
+      background-color: tomato;
+      padding: 6px 12px;
+      border-radius: 6px;
+      color: #fff;
+      display: inline-block;
+      cursor: pointer;
+      margin: 0 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+  function NavBar (props) {
+    return (
+      <ul className="NavBar">{props.children}</ul>
+    )
+  }
+
+  function Button(props) {
+    return (
+      <button className="Button" style={props.style} onClick={props.handleClick}>{props.children}</button>
+    )
+  }
+
+  function Item (props) {
+    function handleClick() {
+      alert(props.name)
+    }
+    return (
+      <li className="Item" onClick={handleClick}><a href="#">{props.name}</a></li>
+    )
+  }
+
+  function Menu (props) {
+    return (
+      <NavBar>
+        <Item name="home" />
+        <Item name="person" />
+      </NavBar>
+    )
+  }
+
+  function Dialog (props) {
+    return (
+      <div className={props.show ? 'Dialog' : 'Dialog-Hide'}>
+        <header className="Dialog-Header">{props.header}</header>
+        <div className="Dialog-Content">{props.content}</div>
+        <footer className="Dialog-Footer">{props.footer}</footer>
+      </div>
+      )
+  }
+
+  class PageContainer extends React.Component {
+    constructor (props) {
+      super(props)
+      this.state = {
+        show: false
+      }
+      this.handleShow = this.handleShow.bind(this)
+      this.handleSure = this.handleSure.bind(this)
+    }
+    handleShow () {
+      this.setState({
+        show: !this.state.show
+      })
+      console.log('show: ', this.state.show)
+    }
+    handleSure() {
+      alert('您点了确定')
+      this.handleShow()
+    }
+    render () {
+      const content = `
+          有些组件无法提前知晓它们子组件的具体内容。
+      在 Sidebar（侧边栏）和 Dialog（对话框）等展
+      现通用容器（box）的组件中特别容易遇到这种情况。
+      有些组件无法提前知晓它们子组件的具体内容。 在 Sidebar（侧边栏）
+      和 Dialog（对话框）等展 现通用容器（box）的组件中特别容易遇到这种情况。
+      有些组件无法提前知晓它们子组件的具体内容。
+      在 Sidebar（侧边栏）和 Dialog（对话框）等展
+      现通用容器（box）的组件中特别容易遇到这种情况。
+      有些组件无法提前知晓它们子组件的具体内容。 在 Sidebar（侧边栏）
+      和 Dialog（对话框）等展 现通用容器（box）的组件中特别容易遇到这种情况。
+      有些组件无法提前知晓它们子组件的具体内容。
+      在 Sidebar（侧边栏）和 Dialog（对话框）等展
+      现通用容器（box）的组件中特别容易遇到这种情况。
+      有些组件无法提前知晓它们子组件的具体内容。 在 Sidebar（侧边栏）
+      和 Dialog（对话框）等展 现通用容器（box）的组件中特别容易遇到这种情况。
+      有些组件无法提前知晓它们子组件的具体内容。
+      在 Sidebar（侧边栏）和 Dialog（对话框）等展
+      现通用容器（box）的组件中特别容易遇到这种情况。
+      有些组件无法提前知晓它们子组件的具体内容。 在 Sidebar（侧边栏）
+      和 Dialog（对话框）等展 现通用容器（box）的组件中特别容易遇到这种情况。
+      有些组件无法提前知晓它们子组件的具体内容。
+      在 Sidebar（侧边栏）和 Dialog（对话框）等展
+      现通用容器（box）的组件中特别容易遇到这种情况。
+      有些组件无法提前知晓它们子组件的具体内容。 在 Sidebar（侧边栏）
+      和 Dialog（对话框）等展 现通用容器（box）的组件中特别容易遇到这种情况。
+      `
+      return (
+        <div className="PageContainer">
+          <Menu />
+          <Button style={{position:'absolute',bottom:'10%',left: '10%',fontSize: '20px'}} 
+          handleClick={this.handleShow}>弹出窗口</Button>
+          <Dialog show={this.state.show} 
+          header="弹窗的标题"
+          content={content}
+          footer={
+            <div>
+              <Button handleClick={this.handleSure}>确 定</Button>
+              <Button handleClick={this.handleShow}>取 消</Button>
+            </div>
+          }
+          >
+          </Dialog>
+        </div>
+      )
+    }
+  }
+
+
+  ReactDOM.render(
+    <PageContainer />,
+    document.querySelector('#app')
+  )
+  </script>
+</body>
+</html>
