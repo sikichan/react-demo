@@ -1,0 +1,9 @@
+.Button {
+  background-color: tomato;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: #fff;
+  display: inline-block;
+  cursor: pointer;
+  margin: 0 20px;
+}
